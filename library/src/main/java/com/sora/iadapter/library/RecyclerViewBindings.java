@@ -1,4 +1,4 @@
-package com.sora.library;
+package com.sora.iadapter.library;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;

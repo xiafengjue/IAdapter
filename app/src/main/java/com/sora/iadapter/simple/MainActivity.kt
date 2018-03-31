@@ -10,12 +10,12 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.sora.iadapter.simple.databinding.ActivityMainBinding
 import com.sora.iadapter.simple.databinding.ItemMainBinding
-import com.sora.library.IAdapter
-import com.sora.library.ItemNavigator
+import com.sora.iadapter.library.IAdapter
+import com.sora.iadapter.library.ItemNavigator
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(),ItemNavigator<String> {
+class MainActivity : AppCompatActivity(), ItemNavigator<String> {
     val data = ObservableArrayList<String>().apply {
         add("history")
     }

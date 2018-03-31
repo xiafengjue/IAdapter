@@ -9,7 +9,7 @@
 
         <variable
             name="itemNavigator"
-            type="com.sora.library.ItemNavigator" />
+            type="com.sora.iadapter.library.ItemNavigator" />
     </data>
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
