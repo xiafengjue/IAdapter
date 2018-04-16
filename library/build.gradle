@@ -9,7 +9,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -41,12 +41,12 @@ apply plugin: 'com.novoda.bintray-release'//添加
 //项目主页
 def siteUrl = 'https://github.com/xiafengjue/IAdapter'
 publish{
-    repoName = 'MyMaven'//远程仓库名字,不指明，默认是上传到maven
+    repoName = 'FirstMaven'//远程仓库名字,不指明，默认是上传到maven
     userOrg = 'xiafengjue'//bintray.com的用户名
     groupId = 'com.sora'//jcenter上的路径
-    artifactId = ''//项目名称
+    artifactId = 'IAdapter'//项目名称
     publishVersion = '1.0.0'//版本号
-    desc = '一个控件阴影效果,支持阴影大小和颜色设置,可以设置控件上下的阴影'//描述，不重要
+    desc = 'This is a Simple Recycler.Adapter.I encapsulated a number of repeated events to make it easy to use.'//描述，不重要
     website = siteUrl//项目主页
 }
 tasks.withType(Javadoc) {//防止编码问题

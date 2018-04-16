@@ -40,4 +40,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     kapt 'com.android.databinding:compiler:3.1.0'
     implementation project(':library')
+//    implementation 'com.sora:IAdapter:1.0.0'
 }
