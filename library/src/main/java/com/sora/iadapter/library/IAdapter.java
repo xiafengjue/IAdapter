@@ -95,6 +95,9 @@ public abstract class IAdapter<T, VB extends ViewDataBinding> extends RecyclerVi
     protected void convert(@NonNull VB binding, int position, T t) {
     }
 
+    /**
+     * @return 获取heander的数量
+     */
     public int getHeadCount() {
         return headCount;
     }
@@ -108,10 +111,26 @@ public abstract class IAdapter<T, VB extends ViewDataBinding> extends RecyclerVi
         return mData;
     }
 
+    /**
+     * 判断Item类型是否相等。
+     * @param oldData 旧数据
+     * @param data 新数据
+     * @param oldItemPosition 旧数据的游标
+     * @param newItemPosition 新数据的游标
+     * @return 比较结果，默认比较采用Adapter.getItemViewType()
+     */
     protected boolean areItemsTheSame(List<T> oldData, List<T> data, int oldItemPosition, int newItemPosition) {
         return getItemViewType(oldItemPosition) == getItemViewType(newItemPosition);
     }
 
+    /**
+     * 比较两个item的内容是否相等。
+     * @param oldData 旧数据
+     * @param data 新数据
+     * @param oldItemPosition 旧数据的游标
+     * @param newItemPosition 新数据的游标
+     * @return 比较结果，默认比较采用Object.equels()
+     */
     protected boolean areContentsTheSame(List<T> oldData, List<T> data, int oldItemPosition, int newItemPosition) {
         return oldData.get(oldItemPosition).equals(data.get(newItemPosition));
     }
@@ -120,6 +139,9 @@ public abstract class IAdapter<T, VB extends ViewDataBinding> extends RecyclerVi
         notifyItemChanged(getData().indexOf(data));
     }
 
+    /**
+     * @return 设置header view的数量。有时候List中并没有header的相关数据
+     */
     public int getMaxSize() {
         return NO_MAX_SIZE;
     }
