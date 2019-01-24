@@ -70,6 +70,7 @@ recyclerView.adapter = object : IAdapter<String, ItemMainBinding>() {
       IAdapter.setData(List<T> data);
 ```
 使用上面两种方式的时候，会自动显示Item的动画。
+
 4、其它API
 ```Java
 //设置header view的数量。有时候List中并没有header的相关数据
