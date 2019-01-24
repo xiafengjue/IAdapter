@@ -82,7 +82,7 @@ public int getMaxSize();
    * @param data 新数据
    * @param oldItemPosition 旧数据的游标
    * @param newItemPosition 新数据的游标
-   * @return 比较结果，默认比较getItemViewType
+   * @return 比较结果，默认比较采用Adapter.getItemViewType()
    */
 protected boolean areItemsTheSame(List<T> oldData, List<T> data, int oldItemPosition, int newItemPosition);
 /**
