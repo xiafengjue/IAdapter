@@ -4,31 +4,97 @@
 
 build
 
-    compile 'com.sora:InstanceCoupling:1.0.0'
+    compile 'com.sora:IAdapter:1.0.0'
 
-##使用方法
-注解需要保存的字段：
-```Java
-@SaveField//给name属性添加一个注解
-private String name;
-```
-读取
-```Java
-//读取数据
-Couple.readInstance(this, savedInstanceState);
-TextView textView = findViewById(R.id.textview);
-textView.setText(name);
-```
-保存：
-```Java
-@Override
-protected void onSaveInstanceState(Bundle outState) {
-   super.onSaveInstanceState(outState);
-   //保存数据
-   Couple.saveInstance(this, outState);
-}
-```
+使用方法
+1、Item布局文件请使用layout节点：
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="item"
+            type="String" />
 
+        <variable
+            name="itemNavigator"
+            type="com.sora.iadapter.library.ItemNavigator" />
+    </data>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:gravity="center"
+        android:onClick="@{()->itemNavigator.itemDetail(item)}"
+        android:text="@{item}" />
+</layout>
+```
+2、RecyclerView绑定Adapter
+使用DataBinding可以在xml中使用app:setData进行数据的绑定
+```
+//需要使用多类型的View，将ItemMainBinding修改为ViewDataBiding
+recyclerView.adapter = object : IAdapter<String, ItemMainBinding>() {
+            override fun getLayoutId(viewType: Int): Int {
+			   //返回item id，使用viewType可以进行多类型的处理
+                return R.layout.item_main
+            }
+
+            override fun getDataBRId(itemViewType: Int): Int {
+			//返回ViewDataBinding中默认数据的BR ID
+                return BR.item
+            }
+			//功能类似onBindViewHolder
+            override fun convert(binding: ItemMainBinding, position: Int,t:String?){
+                super.convert(binding, position, t)
+            }
+			//功能类似onCreateViewHolder
+            override fun convertListener(binding: ItemMainBinding) {
+                super.convertListener(binding)
+                binding.itemNavigator = this@MainActivity
+            }
+
+        }
+```
+3、设置数据
+可以在xml中直接对RecyclerView进行数据的绑定
+```xml
+      <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:data="@{activity.data}"/>
+```
+也可以使用
+```Java
+      IAdapter.setData(List<T> data);
+```
+使用上面两种方式的时候，会自动显示Item的动画。
+4、其它API
+```Java
+//设置header view的数量。有时候List中并没有header的相关数据
+public int getHeadCount();
+//设置最大显示数
+public int getMaxSize();
+/**
+   * 判断Item类型是否相等。
+   * @param oldData 旧数据
+   * @param data 新数据
+   * @param oldItemPosition 旧数据的游标
+   * @param newItemPosition 新数据的游标
+   * @return 比较结果，默认比较getItemViewType
+   */
+protected boolean areItemsTheSame(List<T> oldData, List<T> data, int oldItemPosition, int newItemPosition);
+/**
+ * 比较两个item的内容是否相等。
+ * @param oldData 旧数据
+ * @param data 新数据
+ * @param oldItemPosition 旧数据的游标
+ * @param newItemPosition 新数据的游标
+ * @return 比较结果，默认比较采用Object.equels()
+ */
+protected boolean areContentsTheSame(List<T> oldData, List<T> data, int oldItemPosition, int newItemPosition)；
+```
 
 Copyright 2018 zhengyang
 
