@@ -7,6 +7,7 @@ build
     compile 'com.sora:IAdapter:1.0.0'
 
 使用方法
+
 1、Item布局文件请使用layout节点：
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
